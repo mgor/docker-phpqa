@@ -26,7 +26,7 @@ run_in_docker() {
     local name="${1}"
     shift
 
-    docker run -it -d --name "${name}" -h "${name}" -v "${HOME}:${HOME}" "mgor/${name}" /bin/bash &> /dev/null || true
+    docker start "${name}" || docker run -it -d --name "${name}" -h "${name}" -v "${HOME}:${HOME}" "mgor/${name}" /bin/bash &> /dev/null || true
 
     docker exec -i "${name}" "${executable}" "$@"
 }
